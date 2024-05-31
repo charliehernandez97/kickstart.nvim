@@ -1,6 +1,7 @@
 # kickstart.nvim
 Before you start, please make sure you have the latest version of neovim and node.js installed. Failing to do so will result in this repo not working
 https://nodejs.org/en/download/package-manager
+
 https://neovim.io/
 
 ## Introduction
