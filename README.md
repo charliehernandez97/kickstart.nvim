@@ -3,7 +3,7 @@ Before you start, please make sure you have the latest version of neovim and nod
 
 ### Node.js  https://nodejs.org/en/download/package-manager
 
-### Noevim   https://neovim.io/
+### Neovim   https://neovim.io/
 
 ## Introduction
 
