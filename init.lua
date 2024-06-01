@@ -83,10 +83,14 @@ I hope you enjoy your Neovim journey,
 
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
+-- Ensure this is at the top of your init.lua to load packer.nvim
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
+-- Ensure that packer.nvim is loaded
+
+-- Ensure that packer.nvim is loaded
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -257,7 +261,14 @@ require('lazy').setup({
       },
     },
   },
-
+  -- Plugin to help with (){}[] autocompletion
+  {
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
+    config = true,
+    -- use opts = {} for passing setup options
+    -- this is equalent to setup({}) function
+  },
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
   -- This is often very useful to both group configuration, as well as handle
@@ -909,8 +920,9 @@ require('lazy').setup({
 })
 require('lspconfig').pyright.setup {}
 require('lspconfig').clangd.setup {}
-require('lspconfig').jdtls.setup {}
 require('lspconfig').html.setup {}
+require('lspconfig').jdtls.setup {}
+require('lspconfig').tsserver.setup {}
 
 --Enable (broadcasting) snippet capability for completion
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -919,6 +931,12 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 require('lspconfig').html.setup {
   capabilities = capabilities,
 }
+-- for autocompletion of ()[]{}
+-- Initialize packer
+
+-- Add your other configurations and mappings below this line
+
+-- init.lua or plugins.lua
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
