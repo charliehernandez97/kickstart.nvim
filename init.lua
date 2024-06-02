@@ -931,9 +931,6 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 require('lspconfig').html.setup {
   capabilities = capabilities,
 }
--- for autocompletion of ()[]{}
--- Initialize packer
-
 -- Add your other configurations and mappings below this line
 
 -- init.lua or plugins.lua
