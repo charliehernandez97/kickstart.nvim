@@ -679,19 +679,29 @@ require('lazy').setup({
         --
 
         lua_ls = {
-          -- cmd = {...},
-          -- filetypes = { ...},
-          -- capabilities = {},
           settings = {
             Lua = {
               completion = {
                 callSnippet = 'Replace',
               },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
             },
           },
         },
+        pyright = {},
+        clangd = {},
+        html = {
+          capabilities = {
+            textDocument = {
+              completion = {
+                completionItem = {
+                  snippetSupport = true,
+                },
+              },
+            },
+          },
+        },
+        jdtls = {},
+        ts_ls = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -702,15 +712,8 @@ require('lazy').setup({
       --  You can press `g?` for help in this menu.
       require('mason').setup()
 
-      -- You can add other tools here that you want Mason to install
-      -- for you, so that they are available from within Neovim.
-      local ensure_installed = vim.tbl_keys(servers or {})
-      vim.list_extend(ensure_installed, {
-        'stylua', -- Used to format Lua code
-      })
-      require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
       require('mason-lspconfig').setup {
+        ensure_installed = vim.tbl_keys(servers),
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
@@ -722,6 +725,14 @@ require('lazy').setup({
           end,
         },
       }
+
+      -- You can add other tools here that you want Mason to install
+      -- for you, so that they are available from within Neovim.
+      local ensure_installed = vim.tbl_keys(servers or {})
+      vim.list_extend(ensure_installed, {
+        'stylua', -- Used to format Lua code
+      })
+      require('mason-tool-installer').setup { ensure_installed = ensure_installed }
     end,
   },
 
@@ -1011,19 +1022,6 @@ require('lazy').setup({
     },
   },
 })
-require('lspconfig').pyright.setup {}
-require('lspconfig').clangd.setup {}
-require('lspconfig').html.setup {}
-require('lspconfig').jdtls.setup {}
-require('lspconfig').ts_ls.setup {}
-
---Enable (broadcasting) snippet capability for completion
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-require('lspconfig').html.setup {
-  capabilities = capabilities,
-}
 -- Add your other configurations and mappings below this line
 
 -- init.lua or plugins.lua
